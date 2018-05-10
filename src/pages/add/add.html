@@ -7,12 +7,18 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>add</ion-title>
+    <ion-title>New Password</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-input mode="wp" placeholder="Enter site..." [(ngModel)]="site"></ion-input>
+  <ion-input mode="wp" placeholder="Enter username..." [(ngModel)]="username"></ion-input>
+  <ion-input mode="wp" type="password" placeholder="Enter secret..." [(ngModel)]="secret"></ion-input>
+  <button ion-button icon-left round (click)="addPassword(site, username, secret)">
+    <ion-icon name="checkmark"></ion-icon>
+    Add Password
+  </button>
 </ion-content>

@@ -7,12 +7,26 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>home</ion-title>
+    <ion-title>Password Manager</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-list *ngFor="let password of passwords">
+    <ion-item>
+      <h2><b>{{ password.site }}</b></h2>
+      <p>{{ password.username }}</p>
+      <p>{{ password.secret }}</p>
+    </ion-item>
+  </ion-list>
+  <ion-item button icon-left (click)="goAdd()">
+    <ion-icon name="add"></ion-icon>
+    Add new password...
+  </ion-item>
+  <button full ion-button color="danger" icon-left (click)="delete()">
+    <ion-icon name="trash"></ion-icon>
+    Clear All
+  </button>
 </ion-content>

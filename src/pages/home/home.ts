@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { TouchID } from '@ionic-native/touch-id';
+import { Storage } from '@ionic/storage';
+
 /**
  * Generated class for the HomePage page.
  *
@@ -15,17 +16,40 @@ import { TouchID } from '@ionic-native/touch-id';
 })
 export class HomePage {
 
+  //list variables
+  passwords: any = [];
+
   constructor(
-    private touchId: TouchID,
+    public storage: Storage,
     public navCtrl: NavController,
     public navParams: NavParams
-  ) {
+  )
+  {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage');
-    this.touchId.isAvailable().then((haha) => {
-      alert(haha);    
+  ionViewDidEnter()
+  {
+    this.storage.get('passwords').then((res: any) => {
+      if(res !== null)
+      {
+        this.passwords = res;
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
+  goAdd()
+  {
+    let passwords = this.passwords;
+    this.navCtrl.push('AddPage', { passwords });
+  }
+
+  delete()
+  {
+    this.storage.clear().then(() => {
+      window.location.reload();
     })
   }
 
